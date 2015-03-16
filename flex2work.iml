@@ -2,7 +2,7 @@
 <module type="Flex" version="4">
   <component name="FlexBuildConfigurationManager" active="flex2work">
     <configurations>
-      <configuration name="flex2work" main-class="Main" output-file="Main.swf" output-folder="$MODULE_DIR$/out/production/flex2work" use-html-wrapper="true" wrapper-template-path="$MODULE_DIR$/html-template">
+      <configuration name="flex2work" main-class="Main" output-file="Main.swf" output-folder="$MODULE_DIR$/bin" use-html-wrapper="true" wrapper-template-path="$MODULE_DIR$/html-template">
         <dependencies target-player="16.0">
           <sdk name="4.14.0" />
         </dependencies>
