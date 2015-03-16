@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+  Created by liurui on 15/3/14.
+-->
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+                   cornerRadius="2" currentState="normal"
+                   width="30" height="7" borderVisible="false" backgroundColor.normal="#c2c5c6"
+                   backgroundColor.over="#47C6EE"
+                   rollOut="currentState = 'normal'" rollOver="currentState='over'">
+    <s:states>
+        <s:State name="normal"/>
+        <s:State name="over"/>
+    </s:states>
+
+</s:BorderContainer>

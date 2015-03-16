@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!--
+  Created by liurui on 15/3/14.
+-->
+<s:TextInput xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+             text="" skinClass="assets.skin.MyTextInputSkin" borderVisible="false" fontSize="19" color="#333434"
+             focusAlpha="0" change="changeHandler(event)">
+    <fx:Script><![CDATA[
+        import spark.events.TextOperationEvent;
+
+        private var _isPassword:Boolean = false;
+
+        private var _swapPassword:String = "";
+        [Bindable]
+        public var isShowLoginButton:Boolean = false;
+        [Bindable]
+        public var isCanLogin:Boolean = false;
+
+
+        [Bindable("change")]
+        [Bindable("textChanged")]
+
+        // Compiler will strip leading and trailing whitespace from text string.
+        [CollapseWhiteSpace]
+        override public function set text(value:String):void {
+            if (isPassword) {
+                _swapPassword = value;
+                super.text = replaceText(value, '●');
+            } else {
+                super.text = value;
+            }
+
+        }
+
+        [Inspectable(category="General", defaultValue="")]
+        override public function get text():String {
+            if (isPassword)
+                return _swapPassword;
+            else
+                return super.text;
+        }
+
+
+        private function replaceText(value:String, point:String):String {
+            if (value == null)
+                return "";
+
+            var length:int = value.length;
+
+            if (length == 0)
+                return "";
+
+            var s:String = "";
+            for (var i:int = 0; i < length; i++) {
+                s += point;
+            }
+
+            return s;
+        }
+
+        [Bindable]
+        public function get isPassword():Boolean {
+            return _isPassword;
+        }
+
+        public function set isPassword(value:Boolean):void {
+            _isPassword = value;
+            text = super.text;
+        }
+
+        private function changeHandler(event:TextOperationEvent):void {
+            text = super.text;
+        }
+        ]]></fx:Script>
+</s:TextInput>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+  Created by liurui on 15/3/14.
+-->
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+         xmlns:head="component.head.*" focusEnabled="true"
+         rollOver="showCircleFade.play()" rollOut="hideCircleFade.play()">
+
+    <fx:Declarations>
+        <s:Fade id="showCircleFade" target="{circleEllipse}" alphaFrom="0" alphaTo="1" duration="100"/>
+        <s:Fade id="hideCircleFade" target="{circleEllipse}" alphaFrom="1" alphaTo="0" duration="100"/>
+    </fx:Declarations>
+
+    <s:Ellipse id="circleEllipse" top="-2" left="-2" right="-2" bottom="-2" alpha="0">
+        <s:fill>
+            <s:SolidColor color="0x47c6ee"/>
+        </s:fill>
+    </s:Ellipse>
+
+    <head:PhotoBox height="{height}" width="{width}" picIndex="{picIndex}"/>
+    <fx:Script><![CDATA[
+        [Bindable]
+        public var picIndex:int = 0;
+        ]]></fx:Script>
+</s:Group>

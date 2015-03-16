@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<!--
+  Created by liurui on 15/3/14.
+-->
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+                   width="100%" height="90" bottom.normal="5" bottom.plus="-75" cornerRadius="8"
+                   borderVisible="false" backgroundColor="#28a1da" backgroundAlpha="0.9">
+    <s:states>
+        <s:State name="normal"/>
+        <s:State name="plus"/>
+    </s:states>
+    <s:transitions>
+        <s:Transition fromState="normal" toState="plus">
+            <s:Move target="{this}" duration="200" effectEnd="dropShadow.visible=true"/>
+        </s:Transition>
+        <s:Transition fromState="plus" toState="normal">
+            <s:Move target="{this}" duration="200" effectStart="dropShadow.visible=false"/>
+        </s:Transition>
+    </s:transitions>
+
+
+    <fx:Style>
+        @namespace s "library://ns.adobe.com/flex/spark";
+
+        .label {
+            color: #f5f5f5;
+            fontSize: 12;
+        }
+
+    </fx:Style>
+
+    <s:HGroup width="100%" height="100%" paddingRight="20" paddingLeft="20" paddingBottom="20" verticalAlign="bottom"
+            >
+        <s:VGroup gap="10">
+            <s:CheckBox id="savePWCheckBox" skinClass="assets.skin.MyCheckBoxSkin" label="记住密码" styleName="label"
+                        selected="{user.isSavaPW}"/>
+            <s:CheckBox id="autoLoginCheckBox" skinClass="assets.skin.MyCheckBoxSkin" label="自动登录" styleName="label"
+                        click="autoLoginCheckBox.selected?savePWCheckBox.selected = true:''"
+                        selected="{user.isAutoLogin}"/>
+        </s:VGroup>
+        <s:Spacer width="100%"/>
+        <s:VGroup gap="10">
+            <s:HGroup>
+                <s:Label text="忘记密码" fontSize="13" visible="false"/>
+                <s:Label text="忘记密码" styleName="label"/>
+            </s:HGroup>
+            <s:HGroup>
+                <s:Label text="忘记密码" fontSize="13" visible="false"/>
+                <s:Label text="注册账号" styleName="label"/>
+            </s:HGroup>
+        </s:VGroup>
+    </s:HGroup>
+
+
+    <s:RectangularDropShadow id="dropShadow" visible="false" width="100%" height="100%" blRadius="8" brRadius="8"
+                             tlRadius="8"
+                             trRadius="8"
+                             distance="0"
+                             angle="0" color="0x000000"/>
+    <fx:Script><![CDATA[
+        import vo.UserItem;
+
+        private var _user:UserItem;
+        [Bindable]
+        public function get user():UserItem {
+            return _user;
+        }
+
+        public function set user(value:UserItem):void {
+            _user = value;
+        }
+        ]]></fx:Script>
+</s:BorderContainer>

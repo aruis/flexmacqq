@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!--
+  Created by liurui on 15/3/16.
+-->
+<mx:Tile xmlns:fx="http://ns.adobe.com/mxml/2009"
+         xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:head="component.head.*"
+         verticalScrollPolicy="off" paddingLeft="2" paddingTop="2"
+         horizontalGap="10" verticalGap="10">
+    <fx:Metadata>
+        [Event(name='itemSelected', type='event.HeadEvent')]
+        [Event(name='itemOver', type='event.HeadEvent')]
+        [Event(name='itemOut', type='event.HeadEvent')]
+    </fx:Metadata>
+    <mx:Repeater id="rp" dataProvider="{Consts.list}">
+        <head:HeadBox width="55" height="55" picIndex="{rp.currentItem.picIndex}"
+                      click="headBox1_clickHandler(event)" rollOver="headBox1_rollOverHandler(event)"
+                      rollOut="headBox1_rollOutHandler(event)"/>
+    </mx:Repeater>
+    <fx:Script><![CDATA[
+        import event.HeadEvent;
+
+        private function headBox1_clickHandler(e:MouseEvent):void {
+            dispatchEvent(new HeadEvent(HeadEvent.SELECTED, e.currentTarget.getRepeaterItem()));
+        }
+
+        private function headBox1_rollOverHandler(e:MouseEvent):void {
+            dispatchEvent(new HeadEvent(HeadEvent.OVER, e.currentTarget.getRepeaterItem()));
+        }
+
+        private function headBox1_rollOutHandler(e:MouseEvent):void {
+            dispatchEvent(new HeadEvent(HeadEvent.OUT, e.currentTarget.getRepeaterItem()));
+        }
+        ]]></fx:Script>
+</mx:Tile>

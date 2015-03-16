@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!--
+  Created by liurui on 14/12/20.
+-->
+<s:SpriteVisualElement xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+                       addedToStage="addedToStageHandler(event)">
+    <fx:Script><![CDATA[
+        private var _picIndex:int = 0;
+        var target:Loader = new Loader();
+
+        private function addedToStageHandler(event:Event):void {
+
+            target.contentLoaderInfo.addEventListener(Event.COMPLETE, completeHandler);
+            target.load(new URLRequest("assets/image/" + picIndex + ".jpg"));
+
+            function completeHandler(evt:Event):void {
+
+                removeChildren();
+
+
+                target.width = width;
+                target.height = height;
+
+                var mask:Sprite = new Sprite;//遮匝
+                var cirlce:Sprite = new Sprite;//中间镂空的圆形
+
+                target.cacheAsBitmap = true;
+                mask.cacheAsBitmap = true;
+                cirlce.cacheAsBitmap = true;
+
+                addChild(target);
+
+
+                cirlce.graphics.beginFill(0x00ff00);//画中心镂空的圆
+                cirlce.graphics.drawCircle(0, 0, width / 2);
+                cirlce.graphics.endFill();
+                cirlce.x = target.width / 2;//位置移到中间
+                cirlce.y = target.height / 2;
+
+                cirlce.blendMode = BlendMode.LAYER;
+
+                //cirlce.addChild(rect);//rect和circle组合成中间镂空的图案
+                mask.addChild(cirlce);//把中间圆形镂空的图案放到mask中，成为中间镂空的mask
+                target.mask = mask;//加上则遮匝
+                addChild(mask);
+            }
+
+        }
+
+        [Bindable]
+        public function get picIndex():int {
+            return _picIndex;
+        }
+
+        public function set picIndex(value:int):void {
+            _picIndex = value;
+            target.load(new URLRequest("assets/image/" + picIndex + ".jpg"));
+        }
+        ]]></fx:Script>
+</s:SpriteVisualElement>
