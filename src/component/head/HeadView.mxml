@@ -35,7 +35,7 @@
         public var picIndex:int;
 
         private function multiHeadView_itemSelectedHandler(e:HeadEvent):void {
-            singleHeadBox.picIndex = e.selectItem.picIndex;
+            //singleHeadBox.picIndex = e.selectItem.picIndex;
             currentState = "single";
             selectBack(e.selectItem, true);
         }

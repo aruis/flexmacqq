@@ -37,5 +37,9 @@ public class UserItem {
     public function get isAutoLogin():Boolean {
         return _isAutoLogin;
     }
+
+    public function clone():UserItem {
+        return new UserItem(_picIndex, _qq, _pw, _isSavaPW, _isAutoLogin);
+    }
 }
 }

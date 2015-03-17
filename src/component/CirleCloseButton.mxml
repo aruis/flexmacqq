@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!--
+  Created by liurui on 15/3/17.
+-->
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+         currentState="normal" rollOver="currentState='over'" rollOut="currentState='normal'">
+    <s:states>
+        <s:State name="normal"/>
+        <s:State name="over"/>
+    </s:states>
+    <s:Ellipse width="12" height="12" includeIn="normal">
+        <s:fill>
+            <s:SolidColor color="0xcfd3d4"/>
+        </s:fill>
+    </s:Ellipse>
+    <s:Ellipse width="12" height="12" includeIn="over">
+        <s:fill>
+            <s:SolidColor color="0xfe564e"/>
+        </s:fill>
+    </s:Ellipse>
+
+    <s:Line width="8" horizontalCenter="0" verticalCenter="0" includeIn="over" rotation="45">
+        <s:stroke>
+            <s:SolidColorStroke color="0x333434" weight="1"/>
+        </s:stroke>
+    </s:Line>
+
+    <s:Line width="8" horizontalCenter="0" verticalCenter="0" includeIn="over" rotation="-45">
+        <s:stroke>
+            <s:SolidColorStroke color="0x333434" weight="1"/>
+        </s:stroke>
+    </s:Line>
+</s:Group>

@@ -10,12 +10,11 @@
         import vo.UserItem;
 
         private var _user:UserItem;
-        [Bindable]
         private var _selectUser:UserItem;
 
         private function setItem(item:UserItem, isSelect:Boolean = false):void {
             if (isSelect) {
-                _selectUser = item;
+                _selectUser = item.clone();
             }
 
             user = item;
@@ -37,7 +36,7 @@
                 i++;
             }
 
-            setItem(item, true);
+            setItem(defaultUser, true);
         }
 
         [Bindable]
@@ -52,6 +51,15 @@
         public function set user(value:UserItem):void {
             _user = value;
         }
+
+        private function topGroup_clickHandler(event:MouseEvent):void {
+            if (event.target == closeButton) {//排除关闭按钮的click事件
+                return;
+            }
+
+            headView.currentState = 'single';
+            setItem(_selectUser, true);
+        }
         ]]></fx:Script>
 
     <s:Group verticalCenter="0" horizontalCenter="0" width="248" height="317">
@@ -64,9 +72,11 @@
                     <s:VerticalLayout horizontalAlign="center" paddingBottom="10" gap="0"/>
                 </s:layout>
 
-                <s:Group width="100%" height="30" click="headView.currentState='single';setItem(_selectUser)"/>
+                <s:Group id="topGroup" width="100%" height="30" click="topGroup_clickHandler(event)">
+                    <c:CirleCloseButton id="closeButton" x="13" y="13"/>
+                </s:Group>
 
-                <head:HeadView id="headView" selectBack="setItem"/>
+                <head:HeadView id="headView" selectBack="setItem" picIndex="{user.picIndex}"/>
 
                 <s:Spacer height="15"/>
 
