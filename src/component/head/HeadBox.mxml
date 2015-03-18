@@ -3,23 +3,47 @@
   Created by liurui on 15/3/14.
 -->
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
-         xmlns:head="component.head.*" focusEnabled="true"
-         rollOver="showCircleFade.play()" rollOut="hideCircleFade.play()">
+         focusEnabled="true" currentState="normal"
+         rollOver="currentState='over'" rollOut="currentState='normal'">
 
-    <fx:Declarations>
-        <s:Fade id="showCircleFade" target="{circleEllipse}" alphaFrom="0" alphaTo="1" duration="100"/>
-        <s:Fade id="hideCircleFade" target="{circleEllipse}" alphaFrom="1" alphaTo="0" duration="100"/>
-    </fx:Declarations>
+    <s:states>
+        <s:State name="normal"/>
+        <s:State name="over"/>
+    </s:states>
 
-    <s:Ellipse id="circleEllipse" top="-2" left="-2" right="-2" bottom="-2" alpha="0">
+    <s:transitions>
+        <s:Transition fromState="*" toState="*">
+            <s:Fade targets="{[bluEllipse,darkEllipse]}" duration="100"/>
+        </s:Transition>
+    </s:transitions>
+
+    <s:Ellipse id="bluEllipse" top="-2" left="-2" right="-2" bottom="-2" alpha.normal="0" alpha.over="1">
         <s:fill>
             <s:SolidColor color="0x47c6ee"/>
         </s:fill>
     </s:Ellipse>
 
-    <head:PhotoBox height="{height}" width="{width}" picIndex="{picIndex}"/>
+    <s:Ellipse id="darkEllipse" top="-1" left="-1" right="-1" bottom="-1" alpha.normal="1" alpha.over="0">
+        <s:fill>
+            <s:SolidColor color="0xc2c5c6"/>
+        </s:fill>
+    </s:Ellipse>
+
+    <s:Ellipse width="100%" height="100%">
+        <s:fill>
+            <s:BitmapFill id="img" fillMode="scale"/>
+        </s:fill>
+    </s:Ellipse>
+
+    <!--<head:PhotoBox height="{height}" width="{width}" picIndex="{picIndex}"/>-->
     <fx:Script><![CDATA[
         [Bindable]
-        public var picIndex:int = 0;
+        private var _picIndex:int = 0;
+
+        public function set picIndex(value:int):void {
+            _picIndex = value;
+
+            img.source = Consts['pic' + (value == -1 ? 'Default' : value)];
+        }
         ]]></fx:Script>
 </s:Group>
